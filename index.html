@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jumpscare Horror</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .start-screen {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: black;
+      z-index: 10;
+    }
+
+    button {
+      padding: 15px 35px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background: red;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 20px red;
+    }
+
+    button:hover {
+      background: darkred;
+    }
+
+    .jumpscare {
+      position: fixed;
+      inset: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      z-index: 999;
+    }
+
+    .jumpscare img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: shake 0.08s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(10px, -10px); }
+      50% { transform: translate(-10px, 10px); }
+      75% { transform: translate(10px, 10px); }
+      100% { transform: translate(-10px, -10px); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="start-screen" id="startScreen">
+    <h1>⚠️ WARNING HORROR ⚠️</h1>
+    <p>Klik tombol untuk memulai...</p>
+    <button onclick="startJumpscare()">MULAI</button>
+  </div>
+
+  <div class="jumpscare" id="jumpscare">
+    <img src="https://img.sanishtech.com/u/6d81ffdc7348efce37c1448a29fa95a8.jpg" alt="Jumpscare">
+  </div>
+
+  <audio id="scarySound">
+    <source src="https://www.myinstants.com/media/sounds/scream.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function startJumpscare() {
+      const sound = document.getElementById("scarySound");
+      const jumpscare = document.getElementById("jumpscare");
+      const startScreen = document.getElementById("startScreen");
+
+      // Hapus layar awal
+      startScreen.style.display = "none";
+
+      // Fullscreen
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+
+      // Set volume FULL
+      sound.volume = 1.0;
+
+      // Delay sebelum jumpscare muncul
+      setTimeout(() => {
+        jumpscare.style.display = "flex";
+        sound.play();
+      }, 2000);
+    }
+  </script>
+
+</body>
+      </html>
